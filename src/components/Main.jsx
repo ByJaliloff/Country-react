@@ -4,8 +4,6 @@ function Main({ countries, randomCountry, setRandomCountry, selectedRegion, setS
   setSelectedCountry, searchTerm }) {
   const [visibleCount, setVisibleCount] = useState(20);
 
-
-  // getRandomCountry burada qəbul edilmiş countries massivindən istifadə edir
   const getRandomCountry = () => {
     if (!countries || countries.length === 0) return null;
     const index = Math.floor(Math.random() * countries.length);

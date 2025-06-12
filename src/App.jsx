@@ -55,7 +55,7 @@ function App() {
           searchVisible={searchVisible}
           onSearchToggle={handleSearchToggle}
           searchTerm={searchTerm}
-          onSearch={setSearchTerm}  // onSearch prop göndəririk
+          onSearch={setSearchTerm} 
         />
       )}
 
@@ -69,8 +69,8 @@ function App() {
         setSelectedRegion={setSelectedRegion}
         selectedCountry={selectedCountry}
         setSelectedCountry={setSelectedCountry}
-        searchTerm={searchTerm}  // axtarış term-i Main-ə ötürmək lazımdır
-        searchVisible={searchVisible}  // lazım ola bilər
+        searchTerm={searchTerm} 
+        searchVisible={searchVisible}  
       />
 
       <Footer />

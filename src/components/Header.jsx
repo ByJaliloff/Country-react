@@ -65,7 +65,6 @@ function Header({ setRandomCountry, setSelectedRegion }) {
           ))}
         </ul>
 
-        {/* Dark Mode Button */}
         <div className="flex items-center space-x-4">
           <button
             onClick={toggleTheme}
