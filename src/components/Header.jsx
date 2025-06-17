@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaMoon, FaSun, FaGlobe } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Header({ setRandomCountry, setSelectedRegion, getRandomCountry, setSearchTerm }) {
   const [isDarkMode, setIsDarkMode] = useState(() => {
