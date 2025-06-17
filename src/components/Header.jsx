@@ -1,9 +1,14 @@
-import countries from "./data";
 import { useState, useEffect } from "react";
 import { FaMoon, FaSun, FaGlobe } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
-function Header({ setRandomCountry, setSelectedRegion }) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+function Header({ setRandomCountry, setSelectedRegion, getRandomCountry, setSearchTerm }) {
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("isDarkMode");
+    return savedTheme === "true" ? true : false;
+  });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isDarkMode) {
@@ -11,6 +16,7 @@ function Header({ setRandomCountry, setSelectedRegion }) {
     } else {
       document.documentElement.classList.remove("dark");
     }
+    localStorage.setItem("isDarkMode", isDarkMode);
   }, [isDarkMode]);
 
   const toggleTheme = () => {
@@ -18,14 +24,17 @@ function Header({ setRandomCountry, setSelectedRegion }) {
   };
 
   const handleIconClick = () => {
-    const randomIndex = Math.floor(Math.random() * countries.length);
-    setRandomCountry(countries[randomIndex]);
+    const country = getRandomCountry();
+    setRandomCountry(country);
     setSelectedRegion(null);
+    setSearchTerm("");
+    navigate("/countries", { replace: true });
   };
 
   const handleRegionClick = (region) => {
     setSelectedRegion(region);
     setRandomCountry(null);
+    navigate(`/countries/${region.toLowerCase()}`);
   };
 
   return (
@@ -46,8 +55,8 @@ function Header({ setRandomCountry, setSelectedRegion }) {
 
         <button
           onClick={handleIconClick}
-          className="flex items-center p-2 border-b-2 border-transparent focus:border-violet-600 active:border-violet-600 text-violet-500 text-[2.5rem]"
-          aria-label="Show random country"
+          className="text-violet-500 text-[2.5rem] flex items-center p-2 border-b-2 border-transparent focus:border-violet-600 active:border-violet-600"
+          aria-label="Go to main page"
         >
           <FaGlobe />
         </button>
