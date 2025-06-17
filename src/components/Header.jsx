@@ -38,7 +38,7 @@ function Header({ setRandomCountry, setSelectedRegion, getRandomCountry, setSear
   };
 
   return (
-    <header className="p-4 bg-white text-black dark:bg-[#1e1e2f] dark:text-white transition-colors duration-300">
+    <header className="p-4 bg-white text-black dark:bg-[#2c2f48] dark:text-[#e0e0e0] transition-colors duration-300">
       <div className="flex justify-between h-16 mx-auto max-w-screen-xl md:justify-center md:space-x-8">
         <ul className="items-stretch hidden space-x-3 md:flex">
           {["Europe", "Asia", "Americas"].map((region) => (

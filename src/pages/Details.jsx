@@ -12,9 +12,9 @@ function Details({ countries }) {
   const altNames = country.altSpellings?.join(", ") || "Bilinmir";
 
   return (
-    <div className="bg-[#E5E7EB] text-black dark:bg-[#1e1e2f] dark:text-white transition-colors duration-300">
-      <div className="p-6 max-w-4xl mx-auto ">
-        <div className="flex items-center bg-white dark:bg-[#1e1e2f]  shadow-md rounded-lg overflow-hidden border border-gray-300 dark:border-gray-600">
+    <div className="bg-[#E5E7EB] text-black dark:bg-[#282c3a] dark:text-[#e0e0e0] transition-colors duration-300">
+      <div className="p-6 max-w-4xl mx-auto pt-20 pb-20">
+        <div className="flex items-center bg-white dark:bg-[#2c2f48] dark:text-[#e0e0e0]  shadow-md rounded-lg overflow-hidden border border-gray-300 dark:border-gray-600">
           <div className="flex-1 p-6">
             <h1 className="text-3xl  dark font-semibold">{country.name}</h1>
             <p>Capital: {country.capital}</p>

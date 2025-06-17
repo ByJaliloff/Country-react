@@ -11,16 +11,16 @@ function Main({
 }) {
   const [visibleCount, setVisibleCount] = useState(20);
   const { region } = useParams();
-  
-useEffect(() => {
-  if (region) {
-    const formattedRegion = region.charAt(0).toUpperCase() + region.slice(1).toLowerCase();
-    if (selectedRegion !== formattedRegion) {
-      setSelectedRegion(formattedRegion);
-      setRandomCountry(null);
+
+  useEffect(() => {
+    if (region) {
+      const formattedRegion = region.charAt(0).toUpperCase() + region.slice(1).toLowerCase();
+      if (selectedRegion !== formattedRegion) {
+        setSelectedRegion(formattedRegion);
+        setRandomCountry(null);
+      }
     }
-  }
-}, [region]); 
+  }, [region]);
 
 
   const getRandomCountry = () => {
@@ -45,12 +45,12 @@ useEffect(() => {
   }
 
   return (
-    <main className="bg-[#E5E7EB] text-black dark:bg-[#1e1e2f] dark:text-white transition-colors duration-300">
+    <main className="bg-[#E5E7EB] text-black dark:bg-[#282c3a] dark:text-[#e0e0e0] transition-colors duration-300">
       <div className="container mx-auto p-4">
         {!selectedRegion && !searchTerm && randomCountry && (
           <Link
             to={`/details/${randomCountry.alpha3Code}`}
-            className="block mb-8 bg-white text-black dark:bg-[#1e1e2f] dark:text-white shadow-md rounded-lg overflow-hidden max-w-[60%] mx-auto"
+            className="block mb-8 bg-white text-black dark:bg-[#2c2f48] dark:text-[#e0e0e0] shadow-md rounded-lg overflow-hidden max-w-[60%] mx-auto"
           >
             <div className="flex items-center">
               <div className="ml-8">
@@ -92,7 +92,7 @@ function CountryCards({ visibleCount, showMore, showLess, countries }) {
           <Link
             key={country.alpha3Code}
             to={`/details/${country.alpha3Code}`}
-            className="bg-white text-black dark:bg-[#1e1e2f] dark:text-white border border-gray-300 dark:border-gray-600 shadow-md rounded-lg overflow-hidden"
+            className="bg-white text-black dark:bg-[#2c2f48] dark:text-[#e0e0e0] border border-gray-300 dark:border-gray-600 shadow-md rounded-lg overflow-hidden"
             style={{ width: "305px", height: "372px" }}
           >
             <img
@@ -114,7 +114,7 @@ function CountryCards({ visibleCount, showMore, showLess, countries }) {
         ))}
       </div>
 
-      <div className="flex justify-center gap-4 mt-8">
+      <div className="flex justify-center gap-4 mt-8 mb-8">
         {visibleCount < countries.length && (
           <button
             onClick={showMore}

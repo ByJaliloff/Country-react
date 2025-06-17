@@ -19,7 +19,7 @@ function Title({ searchTerm, onSearch }) {
   };
 
   return (
-    <div className="bg-[#E5E7EB] text-black dark:bg-[#1e1e2f] dark:text-white transition-colors duration-300">
+    <div className="bg-[#E5E7EB] text-black dark:bg-[#282c3a] dark:text-[#e0e0e0] transition-colors duration-300">
       <div className="container mx-auto max-w-[1280px] px-4 h-[65vh] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-[48px] font-bold text-black dark:text-white">Welcome to CountryApp Website</h1>
