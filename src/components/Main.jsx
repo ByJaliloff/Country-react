@@ -57,7 +57,7 @@ function Main({
                 <img
                   src={randomCountry.flags.svg}
                   alt={randomCountry.name}
-                  className="w-[450px] h-[294px] object-cover mt-4"
+                  className="w-[450px] h-[294px] object-cover mt-4 transition-all duration-300 hover:scale-90"
                 />
               </div>
               <div className="flex-1 w-[340px] h-[294px] p-6">
@@ -98,7 +98,7 @@ function CountryCards({ visibleCount, showMore, showLess, countries }) {
             <img
               src={country.flags.svg}
               alt={`${country.name} flag`}
-              className="w-[305px] h-[208px] object-cover"
+              className="w-[305px] h-[208px] object-cover transition-all duration-300 hover:scale-90"
             />
             <div className="p-6 box-border h-[164px]">
               <p className="text-gray-500 uppercase text-[12px]">{country.region}</p>
