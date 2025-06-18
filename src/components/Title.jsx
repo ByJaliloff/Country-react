@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 function Title({ searchTerm, onSearch }) {
   const [searchVisible, setSearchVisible] = useState(false);
+  const inputRef = useRef(null); 
 
   const handleScroll = () => {
     const target = document.getElementById("countriesContainer");
@@ -18,6 +19,12 @@ function Title({ searchTerm, onSearch }) {
     onSearch(e.target.value);
   };
 
+  useEffect(() => {
+    if (searchVisible && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [searchVisible]);
+
   return (
     <div className="bg-[#E5E7EB] text-black dark:bg-[#282c3a] dark:text-[#e0e0e0] transition-colors duration-300">
       <div className="container mx-auto max-w-[1280px] px-4 h-[65vh] flex items-center justify-center">
@@ -29,6 +36,7 @@ function Title({ searchTerm, onSearch }) {
 
           <div className="relative">
             <input
+              ref={inputRef}
               id="searchInput"
               type="search"
               placeholder="Search..."
@@ -62,7 +70,6 @@ function Title({ searchTerm, onSearch }) {
             >
               <span className="relative z-10">SEARCH</span>
             </button>
-
           </div>
         </div>
       </div>

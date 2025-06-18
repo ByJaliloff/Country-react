@@ -23,12 +23,6 @@ function Main({
   }, [region]);
 
 
-  const getRandomCountry = () => {
-    if (!countries || countries.length === 0) return null;
-    const index = Math.floor(Math.random() * countries.length);
-    return countries[index];
-  };
-
   const showMore = () => setVisibleCount((prev) => prev + 20);
   const showLess = () => setVisibleCount((prev) => Math.max(20, prev - 20));
 
