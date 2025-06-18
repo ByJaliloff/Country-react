@@ -45,7 +45,7 @@ function Header({ setRandomCountry, setSelectedRegion, getRandomCountry, setSear
             <li key={region} className="flex">
               <button
                 onClick={() => handleRegionClick(region)}
-                className="flex items-center px-4 -mb-1 border-b-2 border-gray-300 text-black dark:text-white"
+                className="flex items-center px-4 -mb-1 border-b-2 border-gray-300 hover:border-violet-600 text-black dark:text-white"
               >
                 {region}
               </button>
@@ -69,7 +69,7 @@ function Header({ setRandomCountry, setSelectedRegion, getRandomCountry, setSear
             <li key={region} className="flex">
               <button
                 onClick={() => handleRegionClick(region)}
-                className="flex items-center px-4 -mb-1 border-b-2 border-gray-300 text-black dark:text-white"
+                className="flex items-center px-4 -mb-1 border-b-2 border-gray-300 hover:border-violet-600 text-black dark:text-white"
               >
                 {region}
               </button>
