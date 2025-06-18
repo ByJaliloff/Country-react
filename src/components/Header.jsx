@@ -58,7 +58,10 @@ function Header({ setRandomCountry, setSelectedRegion, getRandomCountry, setSear
           className="text-violet-500 text-[2.5rem] flex items-center p-2 border-b-2 border-transparent focus:border-violet-600 active:border-violet-600"
           aria-label="Go to main page"
         >
-          <FaGlobe />
+          <span className="transition-transform duration-500 hover:[transform:rotateY(180deg)]">
+            <FaGlobe />
+          </span>
+
         </button>
 
         <ul className="items-stretch hidden space-x-3 md:flex">
