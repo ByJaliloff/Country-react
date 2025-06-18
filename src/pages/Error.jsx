@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 function Error() {
   return (
     <div>
-      <main className="grid min-h-full place-items-center bg-[#E5E7EB] text-black dark:bg-[#1e1e2f] dark:text-white transition-colors duration-300 px-6 py-24 sm:py-32 lg:px-8">
+      <main className="grid min-h-full place-items-center bg-[#E5E7EB] text-black dark:bg-[#282c3a] dark:text-white transition-colors duration-300 px-6 py-24 sm:py-32 lg:px-8">
         <div className="text-center">
           <p className="text-base font-semibold text-violet-600">404</p>
           <h1 className="mt-4 text-5xl font-semibold tracking-tight text-balance text-violet-600 sm:text-7xl">Səhifə tapılmadı</h1>
-          <p className="mt-6 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
+          <p className="mt-6 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-white">
             Üzr istəyirik, axtardığınız səhifə mövcud deyil.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
