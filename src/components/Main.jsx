@@ -44,29 +44,31 @@ function Main({
         {!selectedRegion && !searchTerm && randomCountry && (
           <Link
             to={`/details/${randomCountry.alpha3Code}`}
-            className="block mb-8 bg-white text-black dark:bg-[#2c2f48] dark:text-[#e0e0e0] shadow-md rounded-lg overflow-hidden max-w-[60%] mx-auto"
+            className="block mb-8 bg-white text-black dark:bg-[#2c2f48] dark:text-[#e0e0e0] shadow-md rounded-lg overflow-hidden max-w-[900px] mx-auto transition-all duration-300"
           >
-            <div className="flex items-center">
-              <div className="ml-8">
+            <div className="flex flex-col md:flex-row items-center md:items-start">
+
+              <div className="w-full md:w-1/2">
                 <img
                   src={randomCountry.flags.svg}
                   alt={randomCountry.name}
-                  className="w-[450px] h-[294px] object-cover mt-4 transition-all duration-300 hover:scale-90"
+                  className="w-full h-auto object-cover md:h-[294px] transition-transform duration-300 hover:scale-95"
                 />
               </div>
-              <div className="flex-1 w-[340px] h-[294px] p-6">
-                <h1 className="text-4xl mt-2 font-semibold">{randomCountry.name}</h1>
-                <p className="mt-2">{randomCountry.region}</p>
-                <p className="mt-2">Capital: {randomCountry.capital}</p>
-                <p className="mt-2">Population: {randomCountry.population.toLocaleString()}</p>
-                <p className="mt-2">
+
+              <div className="w-full md:w-1/2 p-6">
+                <h1 className="text-2xl md:text-4xl font-semibold">{randomCountry.name}</h1>
+                <p className="mt-2 text-base md:text-lg">{randomCountry.region}</p>
+                <p className="mt-2 text-base md:text-lg">Capital: {randomCountry.capital}</p>
+                <p className="mt-2 text-base md:text-lg">Population: {randomCountry.population.toLocaleString()}</p>
+                <p className="mt-2 text-base md:text-lg">
                   Area: {randomCountry.area?.toLocaleString() || "Bilinmir"} km²
                 </p>
               </div>
+
             </div>
           </Link>
         )}
-
         <CountryCards
           countries={filteredCountries}
           visibleCount={visibleCount}
