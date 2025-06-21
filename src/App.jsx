@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Main from "./components/Main";
 import Title from "./components/Title";
+import Main from "./components/Main";
 import Details from "./pages/Details";
 import Error from "./pages/Error";
+import Admin from "./pages/Admin";
+import RootLayout from "./layout/RootLayout";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -27,7 +27,9 @@ function App() {
   const getRandomCountry = () => getRandomCountryFrom(countries);
 
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/TheOksigen/purfect_data/refs/heads/main/country.json")
+    fetch(
+      "https://raw.githubusercontent.com/TheOksigen/purfect_data/refs/heads/main/country.json"
+    )
       .then((res) => res.json())
       .then((data) => {
         setCountries(data);
@@ -38,48 +40,53 @@ function App() {
       });
   }, []);
 
+  const headerProps = {
+    setRandomCountry,
+    setSelectedRegion,
+    getRandomCountry,
+    setSearchTerm,
+  };
+
+
+  const titleProps = {
+    searchVisible,
+    onSearchToggle: handleSearchToggle,
+    searchTerm,
+    onSearch: setSearchTerm,
+  };
+
+  const mainProps = {
+    countries,
+    randomCountry,
+    setRandomCountry: (country) => setRandomCountry(country || getRandomCountry()),
+    selectedRegion,
+    setSelectedRegion,
+    searchTerm,
+    searchVisible,
+  };
+
   return (
     <>
-      <Header
-        setRandomCountry={setRandomCountry}
-        setSelectedRegion={setSelectedRegion}
-        getRandomCountry={getRandomCountry}
-        setSearchTerm={setSearchTerm}
-      />
-
       <Routes>
+
         <Route path="/" element={<Navigate to="/countries" />} />
 
-        <Route path="/countries/:region?" element={<> {!selectedRegion && (
-          <Title
-            searchVisible={searchVisible}
-            onSearchToggle={handleSearchToggle}
-            searchTerm={searchTerm}
-            onSearch={setSearchTerm}
+        <Route path="/" element={<RootLayout {...headerProps} />}>
+          <Route
+            path="countries/:region?"
+            element={
+              <>
+                {!selectedRegion && <Title {...titleProps} />}
+                <Main {...mainProps} />
+              </>
+            }
           />
-        )}
+          <Route path="details/:code" element={<Details countries={countries} />} />
+          <Route path="*" element={<Error />} />
+        </Route>
 
-          <Main
-            countries={countries}
-            randomCountry={randomCountry}
-            setRandomCountry={(country) => {
-              setRandomCountry(country || getRandomCountry());
-            }}
-            selectedRegion={selectedRegion}
-            setSelectedRegion={setSelectedRegion}
-            searchTerm={searchTerm}
-            searchVisible={searchVisible}
-          />
-        </>
-        }
-        />
-
-        <Route path="/details/:code" element={<Details countries={countries} />} />
-
-        <Route path="*" element={<Error />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
-
-      <Footer />
     </>
   );
 }
