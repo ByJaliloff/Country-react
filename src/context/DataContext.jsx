@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { getAllCountries } from "../service/CountryService";
 
 export const DataContext = createContext();
 
@@ -18,8 +19,7 @@ export function DataProvider({ children }) {
   const getRandomCountry = () => getRandomCountryFrom(countries);
 
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/TheOksigen/purfect_data/refs/heads/main/country.json")
-      .then((res) => res.json())
+    getAllCountries()
       .then((data) => {
         setCountries(data);
         setRandomCountry(getRandomCountryFrom(data));

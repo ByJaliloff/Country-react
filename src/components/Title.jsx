@@ -1,8 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom"; 
+import { DataContext } from "../context/DataContext";
 
-function Title({ searchTerm, onSearch }) {
+function Title() {
+  const { region } = useParams(); 
+  if (region) return null;
+
   const [searchVisible, setSearchVisible] = useState(false);
-  const inputRef = useRef(null); 
+  const inputRef = useRef(null);
+  const { searchTerm, setSearchTerm } = useContext(DataContext);
 
   const handleScroll = () => {
     const target = document.getElementById("countriesContainer");
@@ -16,7 +22,7 @@ function Title({ searchTerm, onSearch }) {
   };
 
   const handleSearchChange = (e) => {
-    onSearch(e.target.value);
+    setSearchTerm(e.target.value);
   };
 
   useEffect(() => {
@@ -42,8 +48,7 @@ function Title({ searchTerm, onSearch }) {
               placeholder="Search..."
               value={searchTerm}
               onChange={handleSearchChange}
-              className={`min-w-[250px] py-[10px] pl-10 pr-3 text-sm rounded-md sm:w-auto focus:outline-none bg-gray-200 text-black focus:bg-gray-300 focus:border-violet-400 mt-4 mx-auto block w-full ${searchVisible ? "" : "hidden"
-                }`}
+              className={`min-w-[250px] py-[10px] pl-10 pr-3 text-sm rounded-md sm:w-auto focus:outline-none bg-gray-200 text-black focus:bg-gray-300 focus:border-violet-400 mt-4 mx-auto block w-full ${searchVisible ? "" : "hidden"}`}
             />
           </div>
 
@@ -60,13 +65,7 @@ function Title({ searchTerm, onSearch }) {
               id="searchBtn"
               type="button"
               onClick={handleSearchToggle}
-              className="relative overflow-hidden text-white bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300
-             font-medium rounded-lg text-sm w-[171px] h-[52px] mb-2
-             shadow-2xl
-             before:absolute before:left-0 before:right-0 before:top-0 before:h-0 before:w-full before:bg-purple-700 before:duration-500
-             after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0 after:w-full after:bg-purple-700 after:duration-500
-             hover:text-white hover:shadow-purple-900 hover:before:h-1/2 hover:after:h-1/2
-             before:transition-all after:transition-all"
+              className="relative overflow-hidden text-white bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm w-[171px] h-[52px] mb-2 shadow-2xl before:absolute before:left-0 before:right-0 before:top-0 before:h-0 before:w-full before:bg-purple-700 before:duration-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0 after:w-full after:bg-purple-700 after:duration-500 hover:text-white hover:shadow-purple-900 hover:before:h-1/2 hover:after:h-1/2 before:transition-all after:transition-all"
             >
               <span className="relative z-10">SEARCH</span>
             </button>

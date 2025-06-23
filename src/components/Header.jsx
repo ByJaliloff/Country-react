@@ -1,8 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FaMoon, FaSun, FaGlobe, FaBars, FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { DataContext } from "../context/DataContext";
 
-function Header({ setRandomCountry, setSelectedRegion, getRandomCountry, setSearchTerm }) {
+function Header() {
+  const {
+    setRandomCountry,
+    setSelectedRegion,
+    getRandomCountry,
+    setSearchTerm,
+  } = useContext(DataContext);
+
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("isDarkMode");
     return savedTheme === "true";
@@ -51,8 +59,6 @@ function Header({ setRandomCountry, setSelectedRegion, getRandomCountry, setSear
   return (
     <header className="p-4 bg-white text-black dark:bg-[#2c2f48] dark:text-[#e0e0e0] transition-colors duration-300 relative z-50">
       <div className="relative flex justify-center items-center h-16 max-w-screen-xl mx-auto px-4">
-
-
         {!menuOpen && (
           <div className="absolute left-4 top-1/2 -translate-y-1/2 md:hidden z-50">
             <button
@@ -101,7 +107,6 @@ function Header({ setRandomCountry, setSelectedRegion, getRandomCountry, setSear
           ))}
         </ul>
 
-
         <div className={`absolute right-4 top-1/2 -translate-y-1/2 z-50 md:block ${menuOpen ? "hidden" : "block"}`}>
           <button
             onClick={toggleTheme}
@@ -113,39 +118,40 @@ function Header({ setRandomCountry, setSelectedRegion, getRandomCountry, setSear
         </div>
 
         {menuOpen && (
-          <button
-            onClick={() => setMenuOpen(false)}
-            className="fixed left-4 top-4 md:hidden z-60 text-3xl text-violet-400 hover:text-violet-600"
-            aria-label="Close menu"
-          >
-            <FaTimes />
-          </button>
-        )}
+          <>
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="fixed left-4 top-4 md:hidden z-60 text-3xl text-violet-400 hover:text-violet-600"
+              aria-label="Close menu"
+            >
+              <FaTimes />
+            </button>
 
-        {menuOpen && (
-          <button
-            onClick={toggleTheme}
-            className="fixed right-4 top-4 md:hidden z-60 text-2xl text-violet-400 hover:text-violet-600 transition-colors"
-            aria-label="Toggle theme"
-          >
-            {isDarkMode ? <FaSun /> : <FaMoon />}
-          </button>
+            <button
+              onClick={toggleTheme}
+              className="fixed right-4 top-4 md:hidden z-60 text-2xl text-violet-400 hover:text-violet-600 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {isDarkMode ? <FaSun /> : <FaMoon />}
+            </button>
+          </>
         )}
-
       </div>
 
       {menuOpen && (
         <nav
-          className={`fixed inset-0 z-40 overflow-auto flex flex-col pt-20 items-center space-y-8
-      ${isDarkMode ? "bg-[#2c2f48]" : "bg-white"}`}
+          className={`fixed inset-0 z-40 overflow-auto flex flex-col pt-20 items-center space-y-8 ${
+            isDarkMode ? "bg-[#2c2f48]" : "bg-white"
+          }`}
           aria-label="Mobile menu"
         >
           {["Europe", "Asia", "Americas", "Africa", "Oceania", "Antarctic"].map((region) => (
             <button
               key={region}
               onClick={() => handleRegionClick(region)}
-              className={`text-2xl px-8 py-4 rounded-lg w-3/4 max-w-xs text-center
-          ${isDarkMode ? "text-white" : "text-black"}`}
+              className={`text-2xl px-8 py-4 rounded-lg w-3/4 max-w-xs text-center ${
+                isDarkMode ? "text-white" : "text-black"
+              }`}
             >
               {region}
             </button>

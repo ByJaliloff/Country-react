@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
+import { DataContext } from "../context/DataContext";
 
-function Main({
-  countries,
-  randomCountry,
-  setRandomCountry,
-  selectedRegion,
-  setSelectedRegion,
-  searchTerm,
-}) {
+function Main() {
+  const {
+    countries,
+    randomCountry,
+    setRandomCountry,
+    selectedRegion,
+    setSelectedRegion,
+    searchTerm,
+    getRandomCountry,
+  } = useContext(DataContext);
+
   const [visibleCount, setVisibleCount] = useState(20);
   const { region } = useParams();
 
@@ -19,9 +23,12 @@ function Main({
         setSelectedRegion(formattedRegion);
         setRandomCountry(null);
       }
-    }
-  }, [region]);
+    } else {
 
+      if (selectedRegion !== null) setSelectedRegion(null);
+      if (randomCountry === null) setRandomCountry(getRandomCountry());
+    }
+  }, [region, selectedRegion, setSelectedRegion, setRandomCountry, randomCountry, getRandomCountry]);
 
   const showMore = () => setVisibleCount((prev) => prev + 20);
   const showLess = () => setVisibleCount((prev) => Math.max(20, prev - 20));
@@ -47,7 +54,6 @@ function Main({
             className="block mb-8 bg-white text-black dark:bg-[#2c2f48] dark:text-[#e0e0e0] shadow-md rounded-lg overflow-hidden max-w-[900px] mx-auto transition-all duration-300"
           >
             <div className="flex flex-col md:flex-row items-center md:items-start">
-
               <div className="w-full md:w-1/2">
                 <img
                   src={randomCountry.flags.svg}
@@ -55,7 +61,6 @@ function Main({
                   className="w-full h-auto object-cover md:h-[294px] transition-transform duration-300 hover:scale-95"
                 />
               </div>
-
               <div className="w-full md:w-1/2 p-6">
                 <h1 className="text-2xl md:text-4xl font-semibold">{randomCountry.name}</h1>
                 <p className="mt-2 text-base md:text-lg">{randomCountry.region}</p>
@@ -65,7 +70,6 @@ function Main({
                   Area: {randomCountry.area?.toLocaleString() || "Bilinmir"} km²
                 </p>
               </div>
-
             </div>
           </Link>
         )}
